@@ -1,0 +1,8 @@
+diff a/Новый текстовый документ.txt b/Новый текстовый документ.txt	(rejected hunks)
+@@ -1,5 +0,0 @@
+-$ git status
+-$ git add --all .
+-$ git status
+-$ git commit -m "Added view and template for detailed blog post as well as CSS for the site."
+-$ git push
+\ No newline at end of file
