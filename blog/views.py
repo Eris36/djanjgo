@@ -4,7 +4,7 @@ from .models import Post
 from .forms import PostForm
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
-
+from django.http import HttpResponse
 
 
 
@@ -52,3 +52,6 @@ def post_edit(request, pk):
 
 def register(request):
     return render(request, 'register.html', {'form': form})
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
