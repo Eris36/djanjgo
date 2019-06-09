@@ -3,3 +3,7 @@ $ git add --all .
 $ git status
 $ git commit -m "Added view and template for detailed blog post as well as CSS for the site."
 $ git push
+
+ћиграци€ базы
+python manage.py makemigrations  создает миграцию с новыми модел€ми или правками
+python manage.py migrate  запускает синхронизацию с базой
