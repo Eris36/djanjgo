@@ -1,13 +1,19 @@
-# IDE
+# IDEs
 .idea
 .vscode
 
 # Cache
 __pycache__
-myvenv
-db.sqlite3
-/static
-.DS_Store
 
-# Database
+# ENV
+/env
+/myvenv
+/myenv
+
+# Static root
+/static
+
+# Other
 *.sqlite3
+*.zip
+*.rar
