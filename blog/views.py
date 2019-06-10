@@ -17,7 +17,7 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'post_detail.html', {'post': post})
 
-
+#Правило нового поста
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -31,7 +31,7 @@ def post_new(request):
         form = PostForm()
     return render(request, 'post_edit.html', {'form': form})
 
-
+#Правило редактирование поста
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -54,11 +54,6 @@ def signup(request):
         if form.is_valid():
             form.save()
             return redirect('accounts/login')
-            # username = form.cleaned_data.get('username')
-            # my_password = form.cleaned_data.get('password1')
-            # user = authenticate(username=username, password=my_password)
-            # login(request, user)
-            # return redirect('index')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
