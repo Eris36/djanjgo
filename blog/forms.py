@@ -12,7 +12,6 @@ class PostForm(forms.ModelForm):
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Это поле обязательно')
-
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2',)

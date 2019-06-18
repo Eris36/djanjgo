@@ -10,7 +10,7 @@
         <div class="row justify-content-end">
             <div class="col-md-4 col-md-offset-4">
                 <a class="sidebar-nav">
-                    {% if user.is_authenticated %}
+                    {% if request.user == form.author or request.user.is_superuser %}
                         <a class="btn btn-default " href="{% url 'post_edit' pk=post.pk %}">Редактировать<span
                                 class=" glyphicon glyphicon-pencil"></span></a>
                     {% else %}
