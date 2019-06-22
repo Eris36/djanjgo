@@ -38,9 +38,11 @@ def post_edit(request, pk):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
+            if post.author == request.user or request.user.is_superuser:
+                post.published_date = timezone.now()
+                post.save()
+            else:
+                return render(request, 'post_edit.html', {'form': form, "error": "Вы не являетесь автором"})
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
