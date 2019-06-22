@@ -64,3 +64,10 @@ h1, h2, h3, h4 {
     text-decoration: none;
     color:rgb(102, 101, 101);
 }
+
+.hr {
+    border: none; /* Убираем границу */
+    background-color: red; /* Цвет линии */
+    color: red; /* Цвет линии для IE6-7 */
+    height: 2px; /* Толщина линии */
+   }
