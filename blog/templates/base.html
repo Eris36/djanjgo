@@ -50,9 +50,14 @@
                     {% endblock %}
                 </div>
                  <div class="col-md-4">
+                      {% if user.is_authenticated %}
                     <div style="height: 100px; background: #48D1CC; margin-top: 20px">
-                        <p style="color: red; text-align:  center; font-size: 15pt; padding-top: 10%">Место для вашей рекламы</p>
-                    </div>
+                        <p style=" text-align:  center; font-size: 15pt; padding-top: 5%">Спасибо, что с ними</p>
+                      {% else %}
+                        <div style="height: 100px; background: #48D1CC; margin-top: 20px">
+                        <p style=" text-align:  center; font-size: 15pt; padding-top: 5%">Что бы убрать рекламу, авторезируйтесь</p>
+                      {% endif %}
+                        </div>
                  </div>
             </div>
         </div>
