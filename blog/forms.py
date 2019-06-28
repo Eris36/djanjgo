@@ -2,6 +2,7 @@ from django import forms
 from .models import Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Comment
 
 
 class PostForm(forms.ModelForm):
@@ -15,3 +16,16 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2',)
+
+#Форма коментария начало
+class CommentForm(forms.Form):
+    parent_comment = forms.IntegerField(
+        widget=forms.HiddenInput,
+        required=False
+    )
+
+    comment_area = forms.CharField(
+        label="",
+        widget=forms.Textarea
+    )
+#Форма коментария конец

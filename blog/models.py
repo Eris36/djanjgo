@@ -28,4 +28,29 @@ class Profile(models.Model):
     city = models.CharField(max_length=300, blank=True)
     born = models.DateField(null=True, blank=True)
 
+ #модуль комментариев начало
+class Comment(models.Model):
+    class Meta:
+        db_table = "comments"
 
+    path = ArrayField(models.IntegerField())
+    article_id = models.ForeignKey(Article)
+    author_id = models.ForeignKey(User)
+    content = models.TextField('Комментарий')
+    pub_date = models.DateTimeField('Дата комментария', default=timezone.now)
+
+    def __str__(self):
+        return self.content[0:200]
+
+    def get_offset(self):
+        level = len(self.path) - 1
+        if level > 5:
+            level = 5
+        return level
+
+    def get_col(self):
+        level = len(self.path) - 1
+        if level > 5:
+            level = 5
+        return 12 - level
+    # модуль комментариев конец
