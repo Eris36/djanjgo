@@ -28,29 +28,23 @@ class Profile(models.Model):
     city = models.CharField(max_length=300, blank=True)
     born = models.DateField(null=True, blank=True)
 
- #модуль комментариев начало
-class Comment(models.Model):
-    class Meta:
-        db_table = "comments"
-
-    path = ArrayField(models.IntegerField())
-    article_id = models.ForeignKey(Article)
-    author_id = models.ForeignKey(User)
-    content = models.TextField('Комментарий')
-    pub_date = models.DateTimeField('Дата комментария', default=timezone.now)
+#Коментарии
+class Reporter(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.EmailField()
 
     def __str__(self):
-        return self.content[0:200]
+        return "%s %s" % (self.first_name, self.last_name)
 
-    def get_offset(self):
-        level = len(self.path) - 1
-        if level > 5:
-            level = 5
-        return level
+class Article(models.Model):
+    headline = models.CharField(max_length=100)
+    pub_date = models.DateField()
+    reporter = models.ForeignKey(Reporter, on_delete=models.CASCADE)
 
-    def get_col(self):
-        level = len(self.path) - 1
-        if level > 5:
-            level = 5
-        return 12 - level
-    # модуль комментариев конец
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ('headline',)
+

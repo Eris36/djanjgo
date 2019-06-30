@@ -9,5 +9,4 @@ urlpatterns = [
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
     path('signup', views.signup, name='signup'),
     path('index', views.index, name='post_list'),
-    path('comment/(?P<article_id>[0-9]+)/$', views.add_comment, name='add_comment'),
 ]

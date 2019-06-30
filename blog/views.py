@@ -49,7 +49,7 @@ def post_edit(request, pk):
 
     return render(request, 'post_edit.html', {'form': form})
 
-
+#Регистрацпия нового пользователя
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
