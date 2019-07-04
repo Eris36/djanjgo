@@ -48,3 +48,12 @@ class Article(models.Model):
     class Meta:
         ordering = ('headline',)
 
+#Форма для комментария
+class Reporter(models.Model):
+    first_name = models.CharField(max_length=30)
+    comments = models.CharField(max_length=200)
+    email = models.EmailField()
+    data = models.DateField()
+
+    def __str__(self):
+        return self.first_name

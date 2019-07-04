@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import ListView, DetailView
 from . import views
 
 
@@ -9,4 +10,6 @@ urlpatterns = [
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
     path('signup', views.signup, name='signup'),
     path('index', views.index, name='post_list'),
+    path('comment',ListView.as_view( queryset=Reporter.objects.all().order_by( "-data" )[:20],
+    template_name="templates/comment.html")),
 ]

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for post in object_list %}
+    <a href="/blog/{{post.id}}"> <h3>{{}post.first_name}</h3></a>
+    <h5>{{post.date|"d-m-Y"}}</h5>
+    {% endfor%}
+{% endblock %}
