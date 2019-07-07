@@ -1,8 +1,25 @@
-{% extends 'base.html' %}
 
-{% block content %}
-    {% for post in object_list %}
-    <a href="/blog/{{post.id}}"> <h3>{{}post.first_name}</h3></a>
-    <h5>{{post.date|"d-m-Y"}}</h5>
-    {% endfor%}
-{% endblock %}
+    <form method="POST" class="CommentForm">{% csrf_token %}
+        {{ form.as_p }}
+        <div class="mt-5">
+                <p><textarea name="comment"  href="{% url 'post_edit' pk=post.pk %}">style="width:100%; height:60px "></textarea></p>
+                <button type="submit" class="save btn btn-default">Отправить</button>
+        </div>
+        <div class="row justify-content-end">
+        <div class="col-md-4 col-md-offset-4">
+
+        </div>
+     </div>
+    </form>
+{% for comment in comments %}
+     <div class="post" style="padding-top:5px">
+            <div class="date">
+                <p>{{comment.data_comm}}</p>
+                <p> Автор: {{ comment.author_comm }}</p>
+
+            </div>
+            <p>{{ comment.body_comm|linebreaksbr }}</p>
+            <hr>
+        </div>
+{% endfor %}
+

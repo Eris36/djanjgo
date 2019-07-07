@@ -2,7 +2,7 @@ from django import forms
 from .models import Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from .models import Article
 
 
 
@@ -18,5 +18,10 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2',)
 
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = ('body_comm',)
 
 

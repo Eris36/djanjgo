@@ -1,9 +1,8 @@
 from django.utils import timezone
-from .models import Post
+from .models import Post, Article
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponse
 from django.shortcuts import redirect
 
 
@@ -12,10 +11,11 @@ def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'post_list.html', {'posts': posts})
 
-
+#Правило комментария к посту
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'post_detail.html', {'post': post})
+    comments = Article.objects.filter(post=pk).order_by('-date_comm')
+    return render(request, 'post_detail.html', {'post': post, 'comments': comments})
 
 #Правило нового поста
 def post_new(request):
@@ -60,6 +60,3 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
