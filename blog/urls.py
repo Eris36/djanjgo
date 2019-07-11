@@ -1,5 +1,4 @@
-from django.urls import path, include
-from django.views.generic import ListView, DetailView
+from django.urls import path
 from . import views
 
 
@@ -9,4 +8,5 @@ urlpatterns = [
     path('post/new/', views.post_new, name='post_new'),
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
     path('signup', views.signup, name='signup'),
+    path('comment/<int:pk>/', views.comment_new, name='comment_new'),
 ]

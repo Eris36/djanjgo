@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
+from .forms import CommentForm
 
 
 # Create your views here.
@@ -11,13 +12,27 @@ def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'post_list.html', {'posts': posts})
 
-#Правило комментария к посту
+
+# Правило создание коммента
+def comment_new(request, pk):
+    if request.method == 'POST':  # Запрос метода == добавить данные
+        form = CommentForm(request.POST)  # Cозданное форма (поля из шаблона)
+        if form.is_valid():  # Проверяем валидацию формы(что бы поля совпадали для базы)
+            comment = form.save(commit=False)  # Формо сохранил но не отправил
+            comment.author_comm = request.user  # автор равен авторизированный пользователь
+            comment.post_id = pk
+            comment.save()  # сохранение коммента
+    return redirect('post_detail', pk=pk)  # Переход на страницу (Детали просмотра, ID = комента к посту
+
+
+# Правило отображения комментария к посту
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comments = Article.objects.filter(post=pk).order_by('-date_comm')
     return render(request, 'post_detail.html', {'post': post, 'comments': comments})
 
-#Правило нового поста
+
+# Правило нового поста
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -31,7 +46,8 @@ def post_new(request):
         form = PostForm()
     return render(request, 'post_edit.html', {'form': form})
 
-#Правило редактирование поста
+
+# Правило редактирование поста
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -49,7 +65,8 @@ def post_edit(request, pk):
 
     return render(request, 'post_edit.html', {'form': form})
 
-#Регистрацпия нового пользователя
+
+# Регистрацпия нового пользователя
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -59,4 +76,3 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
-
