@@ -5,11 +5,24 @@ from .forms import PostForm
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 from .forms import CommentForm
+from django.core.paginator import Paginator
+from django.views.generic import TemplateView
 
 
-# Create your views here.
+class BlogView(TemplateView):
+    template_name = 'blog/base.html'
+
+    def get_context_data(self, **kwargs):
+        records = Article.objects.all()
+        context = dict(records=records)
+        return context
+
+# Правило отображения постов
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts_list = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+    paginator = Paginator(posts_list, 3)  # Колличество постов
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
     return render(request, 'post_list.html', {'posts': posts})
 
 
