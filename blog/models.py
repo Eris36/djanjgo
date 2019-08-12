@@ -28,3 +28,5 @@ class Article(models.Model):
     body_comm = models.TextField()
     date_comm = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+

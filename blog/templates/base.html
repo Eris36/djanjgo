@@ -63,11 +63,9 @@
                      <div style="height: 400px; background: #48D1CC; margin-top: 20px; text-align:  center;">
                            <p style=" font-size: 15pt; padding-top: 5%"> Последнее Комментарии</p>
 
+                            {% block content2 %}
+                            {% endblock %}
                             <hr/>
-                            {% for record in records %}
-                               <h2>{{ record.body_comm }}</h2>
-                            <hr/>
-                           {% endfor %}
 
 
 

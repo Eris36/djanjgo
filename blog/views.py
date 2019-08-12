@@ -6,16 +6,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 from .forms import CommentForm
 from django.core.paginator import Paginator
-from django.views.generic import TemplateView
 
+# Правило отображения последних на другой странице
+# def comment_last(request):
+#     comments = Article.objects.all().order_by('-date_comm')[:2]
+#     return render(request, 'comment_last.html', {'comments': comments})
 
-class BlogView(TemplateView):
-    template_name = 'blog/base.html'
-
-    def get_context_data(self, **kwargs):
-        records = Article.objects.all()
-        context = dict(records=records)
-        return context
 
 # Правило отображения постов
 def post_list(request):
@@ -23,7 +19,8 @@ def post_list(request):
     paginator = Paginator(posts_list, 3)  # Колличество постов
     page = request.GET.get('page')
     posts = paginator.get_page(page)
-    return render(request, 'post_list.html', {'posts': posts})
+    comments = Article.objects.all().order_by('-date_comm')[:3]
+    return render(request, 'post_list.html', {'posts': posts, 'comments': comments})
 
 
 # Правило создание коммента
@@ -31,11 +28,11 @@ def comment_new(request, pk):
     if request.method == 'POST':  # Запрос метода == добавить данные
         form = CommentForm(request.POST)  # Cозданное форма (поля из шаблона)
         if form.is_valid():  # Проверяем валидацию формы(что бы поля совпадали для базы)
-            comment = form.save(commit=False)  # Формо сохранил но не отправил
+            comment = form.save(commit=False)  # Форму сохранил но не отправил
             comment.author_comm = request.user  # автор равен авторизированный пользователь
             comment.post_id = pk
             comment.save()  # сохранение коммента
-    return redirect('post_detail', pk=pk)  # Переход на страницу (Детали просмотра, ID = комента к посту
+    return redirect('post_detail', pk=pk)  # Переход на страницу (Детали просмотра, ID = коммента к посту)
 
 
 # Правило отображения комментария к посту

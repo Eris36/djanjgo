@@ -43,3 +43,13 @@
     </nav>
 
 {% endblock %}
+
+
+{% block content2 %}
+    {% for comment in comments %}
+        <hr/>
+        <p>{{ comment.body_comm }}
+        Автор: {{ comment.author_comm }}</p>
+
+    {% endfor %}
+{% endblock %}
