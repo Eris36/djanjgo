@@ -1,6 +1,7 @@
 
     <form method="POST" class="CommentForm" action="/comment/{{ post.id }}/">{% csrf_token %}
         <div class="mt-5">
+            <p>Добавить комментарий:</p>
                 <p><textarea name="body_comm" style="width:100%; height:60px "></textarea>
                 </p>
 

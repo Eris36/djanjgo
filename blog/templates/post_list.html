@@ -48,7 +48,7 @@
 {% block content2 %}
     {% for comment in comments %}
         <hr/>
-        <p>{{ comment.body_comm }}
+        <p><a href="{% url 'post_detail' comment.post_id %}">{{ comment.body_comm }}</a>
         Автор: {{ comment.author_comm }}</p>
 
     {% endfor %}
