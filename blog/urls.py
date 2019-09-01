@@ -9,4 +9,5 @@ urlpatterns = [
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
     path('signup', views.signup, name='signup'),
     path('comment/<int:pk>/', views.comment_new, name='comment_new'),
+    path('users_all', views.users_all, name='users_all'),
 ]

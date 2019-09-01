@@ -8,6 +8,7 @@ from .forms import CommentForm
 from django.core.paginator import Paginator
 
 
+
 # Правило отображения постов
 def post_list(request):
     posts_list = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
@@ -35,6 +36,11 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comments = Article.objects.filter(post=pk).order_by('-date_comm') #К comments присваивается объект из таблицы Article
     return render(request, 'post_detail.html', {'post': post, 'comments': comments}) #Возврощать на страницу, где comments это таблица по фильтру по дате
+
+
+# Правило отображения списка пользователей
+def users_all(request):
+    return render(request, 'users_all.html', {})
 
 
 # Правило нового поста

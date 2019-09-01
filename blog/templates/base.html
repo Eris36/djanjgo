@@ -38,6 +38,7 @@
                                 <a href="{% url 'signup'%}?next={{signup.path}}" class="in">Регистрация</a>
                            {% endif %} 
                     </a>
+
                     </div>
                 </div>
                 </div>
@@ -62,15 +63,12 @@
                      {% endif %}
 
                      <div style=" background: #48D1CC; margin-top: 20px; text-align:  center;">
-                           <p style=" font-size: 15pt; padding-top: 5%"> Последние комментарии</p>
-
-                            {% block content2 %}
-                            {% endblock %}
+                         <p style=" font-size: 15pt; padding-top: 5%"> Последние комментарии</p>
+                             {% block content2 %}
+                             {% endblock %}
                             <hr/>
-
-
-
-                        </div>
+                     </div>
+                  <a href="{% url 'users_all'%}">Юзеры</a>
                  </div>
             </div>
         </div>

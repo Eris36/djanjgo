@@ -9,6 +9,7 @@
                 <p> Автор: {{ post.author }}</p>
 
             </div>
+            <h6>{{ post.theme }}</h6>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
             <p>{{ post.text|linebreaksbr }}</p>
             <hr>
@@ -18,7 +19,7 @@
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-
+{#         Если пост имеет пост перед ним #}
             {% if posts.has_previous %}
             <li class="page-item ">
                 <a class="page-link" href="?page={{ posts.previous_page_number }}">&laquo;</a>
@@ -53,3 +54,4 @@
 
     {% endfor %}
 {% endblock %}
+

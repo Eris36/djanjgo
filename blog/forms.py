@@ -5,21 +5,21 @@ from django.contrib.auth.models import User
 from .models import Article
 
 
-class PostForm(forms.ModelForm):
+class PostForm(forms.ModelForm): #Формы статей
     class Meta:
         model = Post
-        fields = ('title', 'text',)
+        fields = ('title', 'theme', 'text',)
 
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Это поле обязательно')
 
-    class Meta:
+    class Meta:     #Формы регистрации пользователя
         model = User
         fields = ('username', 'email', 'password1', 'password2',)
 
 
-class CommentForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):  #Форма комментария
     class Meta:
         model = Article
         fields = ('body_comm',)

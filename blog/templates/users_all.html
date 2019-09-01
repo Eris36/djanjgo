@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список зарегестрированных пользователей</title>
+</head>
+<body>
+Пока пустая страница
+{% for users in users %}
+        <hr/>
+        <p><a href="{% url 'post_detail' comment.post_id %}">{{ comment.body_comm }}</a>
+        Автор: {{ comment.author_comm }}</p>
+
+    {% endfor %}
+</body>
+</html>

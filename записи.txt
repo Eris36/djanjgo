@@ -7,3 +7,12 @@ $ git push
 ћиграци€ базы
 python manage.py makemigrations  создает миграцию с новыми модел€ми или правками
 python manage.py migrate  запускает синхронизацию с базой
+
+
+дл€ добавлени€ статичной страницы требуетс€:
+1. urls файле добавить строку
+	path('»ћя', views.»ћя, name='»ћя'),
+2. views вписать
+	def »ћя(request):
+    	return render(request, '»ћя.html', {})
+3. —оздать »ћя.html 
