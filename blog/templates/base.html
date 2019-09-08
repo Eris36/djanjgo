@@ -68,7 +68,14 @@
                              {% endblock %}
                             <hr/>
                      </div>
-                  <a href="{% url 'users_all'%}">Юзеры</a>
+
+                    <div style=" background: #48D1CC; text-align:  center;">
+                    <p style=" font-size: 15pt; padding-top: 5%"> Зарегестрированные пользователи</p>
+                     {% block content3 %}
+                     {% endblock %}
+                     <hr/>
+                     </div>
+                 <a href="test_post" class="c">Тест</a>
                  </div>
             </div>
         </div>

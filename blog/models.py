@@ -4,8 +4,25 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):   #Модель создания поста
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200, verbose_name="Тема")
-    theme = models.CharField(max_length=200, verbose_name="Раздел")
+    title = models.CharField(max_length=200, verbose_name="Заголовок")
+    THEME = [
+        ('Не открывается смена', 'Не открывается смена'),
+        ('Не проводится продажа', 'Не проводится продажа'),
+        ('Ошибка по кассе', 'Ошибка по кассе'),
+        ('Нет доступа', 'Нет доступа'),
+        ('Другое', 'Другое'),
+    ]
+
+    theme = models.CharField(
+        max_length=20,
+        choices=THEME,
+        default='Другое',
+        verbose_name="Категория заявки"
+    )
+
+    def is_upperclass(self):
+        return self.theme
+
     text = models.TextField(verbose_name="Текст")
     published_date = models.DateTimeField(auto_now_add=True)
 

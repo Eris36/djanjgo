@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница для тестов</title>
+</head>
+<body>
+
+
+
+<form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+    <div class="form-group">
+    <label for="exampleFormControlSelect1">Тема:</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option>IT</option>
+      <option>1c</option>
+      <option>Проблемы по кассе</option>
+      <option>Трудоустройства</option>
+      <option>5</option>
+    </select>
+  </div>
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+
+
+</body>
+</html>

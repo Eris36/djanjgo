@@ -55,3 +55,12 @@
     {% endfor %}
 {% endblock %}
 
+{% block content3 %}
+    {% for users in users %}
+ <hr/>
+        <p>{{ users.id }}
+        {{ users.username }}
+        </p>
+
+    {% endfor %}
+{% endblock %}

@@ -9,10 +9,48 @@ python manage.py makemigrations  создает миграцию с новыми моделями или правками
 python manage.py migrate  запускает синхронизацию с базой
 
 
-для добавления статичной страницы требуется:
+
+
+Для добавления статичной страницы требуется:
 1. urls файле добавить строку
 	path('ИМЯ', views.ИМЯ, name='ИМЯ'),
-2. views вписать
+
+2. views файле добавить строки
 	def ИМЯ(request):
     	return render(request, 'ИМЯ.html', {})
-3. Создать ИМЯ.html 
+
+3. Создать ИМЯ.html.
+
+4. Создать ссылку на него
+	<a href="Имя" class="c">Имя</a>
+
+
+Для вывода информации с БД.
+В views
+
+from .models import Post, Article, User Подключаем нужную БД
+
+Создаём правило 
+def users_all(request): #Создаем правило
+    users = User.objects.all() #Присваеваем к переменной users таблицу Users
+    return render(request, 'users_all.html', {'users': users}) #Указываем где возврощать переменную users
+
+В нужном месте для отображение вставляем ссылку и какие именно нужны данные с БД.
+
+{% for users in users %}
+        <hr/>
+        <p>{{ users.id }}
+        {{ users.username }}
+        {{ users.email }}</p>
+
+    {% endfor %}
+
+
+
+
+
+
+
+
+
+

@@ -1,11 +1,15 @@
 from django.utils import timezone
-from .models import Post, Article
+from .models import Post, Article, User # Подключаем нужную БД
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 from .forms import CommentForm
 from django.core.paginator import Paginator
+from django import forms
+from django.http import HttpResponseRedirect
+from django.http import HttpResponseNotFound
+
 
 
 
@@ -16,7 +20,8 @@ def post_list(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     comments = Article.objects.all().order_by('-date_comm')[:3]
-    return render(request, 'post_list.html', {'posts': posts, 'comments': comments})
+    users = User.objects.all()  # Присваеваем к переменной users таблицу Users
+    return render(request, 'post_list.html', {'posts': posts, 'comments': comments, 'users': users})
 
 
 # Правило создание коммента
@@ -39,8 +44,13 @@ def post_detail(request, pk):
 
 
 # Правило отображения списка пользователей
-def users_all(request):
-    return render(request, 'users_all.html', {})
+def users_all(request): #Создаем правило
+    users = User.objects.all() #Присваеваем к переменной users таблицу Users
+    return render(request, 'post_list.html', {'users': users}) #Указываем где возврощать переменную users
+
+
+def test_post(request):
+    return render(request, 'test_post.html', {})
 
 
 # Правило нового поста
@@ -87,3 +97,12 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+
+#Удаление постов
+def post_delete(request, pk):
+   post = get_object_or_404(Post, pk=pk)
+   post.delete()  #Удалять пост
+   if not post:
+      return HttpResponseNotFound("<h2>Пост не найден</h2>")  #Исключение
+
+   return redirect('post_list')      #Открывать главную страницу

@@ -23,3 +23,4 @@ class CommentForm(forms.ModelForm):  #Форма комментария
     class Meta:
         model = Article
         fields = ('body_comm',)
+
