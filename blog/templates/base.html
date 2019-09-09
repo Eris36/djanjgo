@@ -20,7 +20,7 @@
                     <div class="col-xl-7">
                         <a class="sidebar-nav">
                             {% if user.is_authenticated %}
-                             <a href="{% url 'post_new' %}" class="top-menu"> + Новый блок<span class="glyphicon glyphicon-plus"></span></a>
+                             <a href="{% url 'post_new' %}" class="top-menu"> + Новый блог<span class="glyphicon glyphicon-plus"></span></a>
                             {% else %}
                                <p style="color: white;font-size: 15pt">Для добовления блока требуется войти</p>
                            {% endif %}

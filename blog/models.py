@@ -14,7 +14,7 @@ class Post(models.Model):   #Модель создания поста
     ]
 
     theme = models.CharField(
-        max_length=20,
+        max_length=200,
         choices=THEME,
         default='Другое',
         verbose_name="Категория заявки"
